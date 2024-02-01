@@ -1,5 +1,4 @@
-import { Dispatch } from "redux";
-import { authAPI, TaskType, todolistsAPI } from "api/todolists-api";
+import { authAPI } from "api/todolists-api";
 import { authActions } from "features/auth/auth.reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createAppAsyncThunk } from "utils/createAppAsyncThunk";
