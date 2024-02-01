@@ -6,9 +6,9 @@ import {
   fetchTodolistsTC,
   FilterValuesType,
   removeTodolistTC,
-  todolistsActions,
+  todolistsActions
 } from "features/TodolistsList/todolists.reducer";
-import { addTaskTC, removeTaskTC, updateTaskTC } from "features/TodolistsList/tasksReducer";
+import { tasksThunks } from "features/TodolistsList/tasksReducer";
 import { TaskStatuses } from "api/todolists-api";
 import { Grid, Paper } from "@mui/material";
 import { AddItemForm } from "components/AddItemForm/AddItemForm";
@@ -38,36 +38,36 @@ export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
     dispatch(thunk);
   }, []);
 
-  const removeTask = useCallback(function (id: string, todolistId: string) {
-    const thunk = removeTaskTC(id, todolistId);
+  const removeTask = useCallback(function(id: string, todolistId: string) {
+    const thunk = tasksThunks.removeTask({ taskId: id, todolistId });
     dispatch(thunk);
   }, []);
 
-  const addTask = useCallback(function (title: string, todolistId: string) {
-    const thunk = addTaskTC(title, todolistId);
+  const addTask = useCallback(function(title: string, todolistId: string) {
+    const thunk = tasksThunks.addTask({ title, todolistId });
     dispatch(thunk);
   }, []);
 
-  const changeStatus = useCallback(function (id: string, status: TaskStatuses, todolistId: string) {
-    const thunk = updateTaskTC(id, { status }, todolistId);
+  const changeStatus = useCallback(function(id: string, status: TaskStatuses, todolistId: string) {
+    const thunk = tasksThunks.updateTask({taskId:id, domainModel:{ status }, todolistId});
     dispatch(thunk);
   }, []);
 
-  const changeTaskTitle = useCallback(function (id: string, newTitle: string, todolistId: string) {
-    const thunk = updateTaskTC(id, { title: newTitle }, todolistId);
+  const changeTaskTitle = useCallback(function(id: string, newTitle: string, todolistId: string) {
+    const thunk = tasksThunks.updateTask({taskId:id, domainModel:{ title: newTitle }, todolistId});
     dispatch(thunk);
   }, []);
 
-  const changeFilter = useCallback(function (filter: FilterValuesType, id: string) {
+  const changeFilter = useCallback(function(filter: FilterValuesType, id: string) {
     dispatch(todolistsActions.changeTodolistFilter({ id, filter }));
   }, []);
 
-  const removeTodolist = useCallback(function (id: string) {
+  const removeTodolist = useCallback(function(id: string) {
     const thunk = removeTodolistTC(id);
     dispatch(thunk);
   }, []);
 
-  const changeTodolistTitle = useCallback(function (id: string, title: string) {
+  const changeTodolistTitle = useCallback(function(id: string, title: string) {
     const thunk = changeTodolistTitleTC(id, title);
     dispatch(thunk);
   }, []);

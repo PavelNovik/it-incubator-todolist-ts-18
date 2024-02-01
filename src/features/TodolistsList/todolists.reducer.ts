@@ -46,7 +46,8 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(clearTasksAndTodolists, () => {
       return [];
-    });
+    })
+      // .addCase(fetchTodolistsTC, ()=>{})
   },
 });
 
@@ -54,6 +55,8 @@ export const todolistsReducer = slice.reducer;
 export const todolistsActions = slice.actions;
 
 // thunks
+
+
 export const fetchTodolistsTC = (): AppThunk => {
   return (dispatch) => {
     dispatch(appActions.setAppStatus({ status: "loading" }));
